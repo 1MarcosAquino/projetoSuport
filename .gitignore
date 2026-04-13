@@ -1,0 +1,212 @@
+# =========================
+
+# Build & Output
+
+# =========================
+
+bin/
+obj/
+out/
+publish/
+
+# =========================
+
+# User-specific files
+
+# =========================
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# =========================
+
+# Logs
+
+# =========================
+
+*.log
+logs/
+*.tlog
+
+# =========================
+
+# OS files
+
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+
+# Visual Studio
+
+# =========================
+
+.vs/
+*.vsp
+*.vspx
+*.psess
+*.pidb
+*.svclog
+
+# =========================
+
+# Visual Studio Code
+
+# =========================
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+
+# =========================
+
+# JetBrains Rider
+
+# =========================
+
+.idea/
+*.sln.iml
+
+# =========================
+
+# NuGet
+
+# =========================
+
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# =========================
+
+# .NET Core
+
+# =========================
+
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# =========================
+
+# ASP.NET Core
+
+# =========================
+
+appsettings.Development.json
+appsettings.Local.json
+
+# (opcional - cuidado!)
+
+# appsettings.json
+
+# =========================
+
+# Entity Framework
+
+# =========================
+
+Migrations/*
+!Migrations/*.cs
+
+# =========================
+
+# Test Results
+
+# =========================
+
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# =========================
+
+# Coverage tools
+
+# =========================
+
+coverage/
+coverage-report/
+
+# =========================
+
+# Docker
+
+# =========================
+
+docker-compose.override.yml
+*.dockerfile
+Dockerfile.local
+
+# =========================
+
+# Publish profiles
+
+# =========================
+
+Properties/PublishProfiles/
+
+# =========================
+
+# Secrets
+
+# =========================
+
+secrets.json
+*.secrets
+.env
+
+# =========================
+
+# Temporary files
+
+# =========================
+
+*.tmp
+*.temp
+*.bak
+
+# =========================
+
+# ReSharper
+
+# =========================
+
+_ReSharper*/
+*.DotSettings.user
+
+# =========================
+
+# Azure
+
+# =========================
+
+.azure/
+
+# =========================
+
+# Node (caso use frontend junto)
+
+# =========================
+
+node_modules/
+dist/
+build/
+
+# =========================
+
+# Misc
+
+# =========================
+
+*.cache
+*.pid
+*.seed
