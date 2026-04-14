@@ -1,6 +1,47 @@
-@MinhaApi.Api_HostAddress = http://localhost:5053
+@URL_BASE = http://localhost:5053/api
 
-GET {{MinhaApi.Api_HostAddress}}/weatherforecast/
+GET {{URL_BASE}}/user/5
 Accept: application/json
+
+###
+
+POST {{URL_BASE}}/user/sing-in
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "1cliente",
+  "password": "123456"
+}
+
+###
+
+
+POST {{URL_BASE}}/user/sing-up
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "4cliente",
+  "email": "9cliente@mail.com",
+  "password": "123456"
+}
+
+###
+
+POST {{URL_BASE}}/user/sing-in
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email":"marcos@mail.com",
+    "password": "123456"
+}
+
+###
+
+GET {{URL_BASE}}/user
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hcmNvc0BtYWlsLmNvbSIsImlhdCI6MTc3NDY1MTQ1OCwiZXhwIjoxNzc0NjUxNDc3LCJzdWIiOiIxIn0.gZadggUMf2ZqubuVIgcF2vvxrgiH3eFs3nCz5PbOO00
 
 ###

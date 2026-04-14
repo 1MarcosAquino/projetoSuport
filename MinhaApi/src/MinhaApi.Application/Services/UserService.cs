@@ -1,6 +1,7 @@
 using MinhaApi.Domain.Entities;
 using MinhaApi.Application.DTOs.User;
 using MinhaApi.Application.Interfaces;
+using BCrypt.Net;
 
 namespace MinhaApi.Application.Services
 {
@@ -17,7 +18,7 @@ namespace MinhaApi.Application.Services
             _tokenService = tokenService;
         }
 
-        public async Task<User> SignUp(CreateUserDTO dto)
+        public async Task<User> SignUp(SignUpDTO dto)
         {
             var user = new User(dto.UserName, _passwordHasher.Hash(dto.Password), dto.Role);
             await _userRepository.AddAsync(user);
@@ -32,6 +33,64 @@ namespace MinhaApi.Application.Services
             if (!_passwordHasher.Verify(password, user.PasswordHash)) return null;
 
             return _tokenService.GenerateToken(user);
+        }
+
+        public async Task<User?> GetById(int id)
+        {
+            return await _userRepository.GetByIdAsync(id);
+        }
+
+        public async Task<List<UserResponseDTO>> GetAll()
+        {
+            var all = await _userRepository.GetAllAsync();
+
+            return all.Select(user => new UserResponseDTO
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Level = user.Level
+            }).ToList();
+        }
+
+        public async Task<bool> Update(int id, UserUpdateDTO updatedUser)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+
+            if (user == null) return false;
+
+            if (!string.IsNullOrEmpty(updatedUser.UserName))
+            {
+                var UserNameExists = await _userRepository.GetByUserNameAsync(updatedUser.UserName);
+
+                if (UserNameExists != null && UserNameExists.Id != id) return false;
+
+                user.UpdateUserName(updatedUser.UserName);
+            }
+
+            if (updatedUser.Level.HasValue)
+                user.UpdateRole(updatedUser.Level.Value);
+
+            if (!string.IsNullOrEmpty(updatedUser.Password))
+            {
+                string passwordHash = BCrypt.Net.BCrypt.HashPassword(updatedUser.Password);
+
+                user.UpdatePassword(passwordHash);
+            }
+
+            await _userRepository.UpdateAsync(user);
+
+            return true;
+        }
+
+        public async Task<bool> Remove(int id)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+
+            if (user == null) return false;
+
+            await _userRepository.RemoveAsync(user);
+
+            return true;
         }
     }
 

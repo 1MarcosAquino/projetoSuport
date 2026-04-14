@@ -6,8 +6,16 @@ namespace MinhaApi.Application.Interfaces
 {
     public interface IUserService
     {
-        Task<User> SignUp(CreateUserDTO dto);
+        Task<User> SignUp(SignUpDTO dto);
 
         Task<string?> SignIn(string username, string password);
+
+        Task<User?> GetById(int id);
+
+        Task<List<UserResponseDTO>> GetAll();
+
+        Task<bool> Update(int id, UserUpdateDTO updatedUser);
+
+        Task<bool> Remove(int id);
     }
 }

@@ -32,38 +32,31 @@ namespace MinhaApi.Domain.Entities
         }
 
         // Método de domínio (exemplo)
-        public void UpdateUser(string userName, UserLevel level)
+        public void UpdateUser(string userName, string passwordHash, UserLevel level)
         {
             UserName = userName;
+            PasswordHash = passwordHash;
             Level = level;
             UpdatedAt = DateTime.UtcNow;
         }
+
+        public void UpdateUserName(string userName)
+        {
+            UserName = userName;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void UpdatePassword(string passwordHash)
+        {
+            PasswordHash = passwordHash;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void UpdateRole(UserLevel level)
+        {
+            Level = level;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
     }
 }
-
-// using System.ComponentModel.DataAnnotations;
-// using MinhaApi.Domain.enums;
-
-// namespace MinhaApi.Domain.Entities
-// {
-//     public class User
-//     {
-//         [Key]
-//         public int Id { get; set; }
-
-//         [Required]
-//         public string UserName { get; set; } = string.Empty;
-
-//         [Required]
-//         public string PasswordHash { get; set; } = string.Empty;
-
-//         [Required]
-//         public UserLevel Level { get; set; } = UserLevel.Employee;
-
-//         public DateTime CreatedAt { get; set; }
-
-//         public DateTime UpdatedAt { get; set; }
-
-//         public List<Ticket> Tickets { get; set; } = new();
-//     }
-// }

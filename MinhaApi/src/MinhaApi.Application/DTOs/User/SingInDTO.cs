@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using MinhaApi.Domain.Enums;
 
 namespace MinhaApi.Application.DTOs.User
 {
-    public class CreateUserDTO
+    public class SingInDTO
     {
         [Required(ErrorMessage = "Nome é obrigatório")]
         [MaxLength(50)]
@@ -13,7 +12,5 @@ namespace MinhaApi.Application.DTOs.User
         [MinLength(6, ErrorMessage = "Mínimo de 6 caracteres")]
         [MaxLength(100)]
         public string Password { get; set; } = string.Empty;
-
-        public UserLevel Role { get; set; } = UserLevel.Employee;
     }
 }

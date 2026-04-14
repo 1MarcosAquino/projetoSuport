@@ -8,6 +8,6 @@ namespace MinhaApi.Application.DTOs.User
 
         public string UserName { get; set; } = string.Empty;
 
-        public UserLevel Role { get; set; }
+        public UserLevel Level { get; set; }
     }
 }
