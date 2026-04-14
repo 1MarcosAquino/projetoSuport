@@ -1,0 +1,32 @@
+<div class="page-form">
+    <div class="form-card">
+        <h2 class="title">{{ title() }}</h2>
+
+        <form [formGroup]="form" (ngSubmit)="login()">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input formControlName="email" id="email" type="email" placeholder="Digite seu email" />
+
+                <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+                    <small *ngIf="form.get('email')?.errors?.['required']"> Email é obrigatório </small>
+                    <small *ngIf="form.get('email')?.errors?.['email']"> Email inválido </small>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input formControlName="password" id="password" type="password" placeholder="Digite sua senha" />
+
+                <div class="error" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+                    <small *ngIf="form.get('password')?.errors?.['required']"> Senha obrigatória </small>
+                    <small *ngIf="form.get('password')?.errors?.['minlength']"> Mínimo 6 caracteres </small>
+                </div>
+            </div>
+
+            <div class="form-action">
+                <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Entrar</button>
+                <a class="btn btn-link" routerLink="/sign-up">Cadastrar</a>
+            </div>
+        </form>
+    </div>
+</div>

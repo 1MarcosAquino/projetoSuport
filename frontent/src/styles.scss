@@ -1,1 +1,138 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    --white: white;
+    --text-white: var(--white);
+    --bg-white: var(--white);
+
+    --error: #ff4555;
+    --text-error: var(--error);
+    --bg-error: var(--error);
+
+    --muted: gray;
+    --text-muted: var(--muted);
+    --bg-muted: var(--muted);
+
+    --primary: #4facfe;
+    --text-primary: var(--primary);
+    --bg-primary: var(--primary);
+
+    --link: #1e1ef2;
+    --text-link: var(--link);
+    --bg-link: var(--link);
+
+    --gray-900: oklch(19.37% 0.006 300.98);
+    --gray-700: oklch(36.98% 0.014 302.71);
+    --gray-400: oklch(70.9% 0.015 304.04);
+
+    --gray-100: oklch(87.285% 0.01666 17.151);
+    --gray-50: oklch(94.611% 0.00011 271.152);
+
+    --box-shadow-primary: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+    --deg: 135deg;
+
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: block;
+    height: 100dvh;
+}
+
+/* styles.scss */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.page-form {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(var(--deg), var(--gray-50), var(--gray-100));
+}
+
+.form-card {
+    background-color: var(--bg-white);
+    padding: 1rem 2rem;
+    border-radius: 0.8rem;
+    width: 20rem;
+    box-shadow: var(--box-shadow-primary);
+}
+
+.form-action {
+    display: grid;
+    grid-template-columns: 2fr auto;
+    gap: 0.5rem;
+}
+
+.form-card .title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 6px;
+    border: 1px solid var(--gray-400);
+}
+
+.btn {
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.7rem;
+    border: none;
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: hsl(from var(--primary) h s calc(l - 10));
+}
+
+.btn-primary:disabled {
+    background-color: var(--gray-400);
+    color: var(--gray-700);
+    cursor: default;
+}
+
+.btn-link {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: hsl(from var(--link) h s calc(l - 2));
+    color: var(--white);
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    background-color: hsl(from var(--link) h s calc(l + 5));
+    text-decoration: underline;
+}
+
+.btn-link:disabled {
+    background-color: var(--gray-400);
+    color: var(--gray-700);
+    cursor: default;
+}
+
+.error {
+    color: var(--error);
+}
