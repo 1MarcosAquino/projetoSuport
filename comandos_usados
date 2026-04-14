@@ -68,3 +68,10 @@ dotnet add package System.IdentityModel.Tokens.Jwt
 dotnet add package Microsoft.IdentityModel.Tokens
 dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
 dotnet add package BCrypt.Net-Next
+
+
+cd src/MinhaApi.Infrastructure; dotnet ef database update -s ../MinhaApi.Api
+
+cd ../MinhaApi.Infrastructure
+dotnet ef migrations add InitialCreate -s ../MinhaApi.Api
+dotnet ef database update -s ../MinhaApi.Api
