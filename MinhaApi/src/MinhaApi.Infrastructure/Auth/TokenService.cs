@@ -4,32 +4,45 @@ using System.Security.Claims;
 using MinhaApi.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
-
+using Microsoft.Extensions.Configuration;
 
 namespace MinhaApi.Infrastructure.Auth
 {
     public class TokenService : ITokenService
     {
-        private readonly string _secretKey = "chave secreta e super segura. carinha de riso";
+        private readonly IConfiguration _configuration;
+
+        public TokenService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public string GenerateToken(User user)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
+
+            var secretKey = _configuration["Jwt:SecretKey"];
+
+            if (string.IsNullOrEmpty(secretKey))
+                throw new InvalidOperationException("secretKey não encontrada.");
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Email, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Role, user.Level.ToString())
             };
 
             var token = new JwtSecurityToken(
-                issuer: "api",
-                audience: "api",
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
                 claims: claims,
                 expires: DateTime.UtcNow.AddHours(2),
-                signingCredentials: creds);
+                signingCredentials: creds
+            );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

@@ -10,7 +10,7 @@ namespace MinhaApi.Application.Interfaces
 
         Task<string?> SignIn(string username, string password);
 
-        Task<User?> GetById(int id);
+        Task<UserResponseDTO?> GetById(int id);
 
         Task<List<UserResponseDTO>> GetAll();
 

@@ -34,6 +34,7 @@ namespace MinhaApi.Application.Services
         public async Task<string?> SignIn(string username, string password)
         {
             var user = await _userRepository.GetByUserNameAsync(username);
+
             if (user == null) return null;
 
             if (!_passwordHasher.Verify(password, user.PasswordHash)) return null;
@@ -41,9 +42,21 @@ namespace MinhaApi.Application.Services
             return _tokenService.GenerateToken(user);
         }
 
-        public async Task<User?> GetById(int id)
+        public async Task<UserResponseDTO?> GetById(int id)
         {
-            return await _userRepository.GetByIdAsync(id);
+            var user = await _userRepository.GetByIdAsync(id);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new UserResponseDTO
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Level = user.Level,
+            };
         }
 
         public async Task<List<UserResponseDTO>> GetAll()

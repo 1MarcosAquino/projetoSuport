@@ -46,13 +46,21 @@ namespace MinhaApi.Api.Controllers
 
         [Authorize]
         [HttpGet("auth")]
-        public IActionResult GetUserInfo()
+        public async Task<ActionResult<User>> GetUserInfo()
         {
-            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
-            var email = User.FindFirstValue(JwtRegisteredClaimNames.Email);
-            var role = User.FindFirstValue(ClaimTypes.Role);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            return Ok(new { userId, email, role });
+            if (userId == null)
+            {
+                throw new InvalidOperationException("Token INvalida.");
+            }
+
+            int id = int.Parse(userId);
+
+            var user = await _service.GetById(id);
+
+            return Ok(user);
+
         }
 
         [Authorize(Roles = "Admin")]
@@ -64,7 +72,7 @@ namespace MinhaApi.Api.Controllers
 
         [Authorize(Policy = "SameUserOrAdmin")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetById(int id)
+        public async Task<ActionResult<UserResponseDTO>> GetById(int id)
         {
             var user = await _service.GetById(id);
 
