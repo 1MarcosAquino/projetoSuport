@@ -2,14 +2,15 @@
     <div class="form-card">
         <h2 class="title">{{ title() }}</h2>
 
-        <form [formGroup]="form" (ngSubmit)="login()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!-- USERNAME -->
             <div class="input-group">
-                <label for="email">Email</label>
-                <input formControlName="email" id="email" type="email" placeholder="Digite seu email" />
+                <label for="username">Nome</label>
+                <input formControlName="username" id="username" type="text" placeholder="Digite seu Nome" />
 
-                <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
-                    <small *ngIf="form.get('email')?.errors?.['required']"> Email é obrigatório </small>
-                    <small *ngIf="form.get('email')?.errors?.['email']"> Email inválido </small>
+                <div class="error" *ngIf="form.get('username')?.touched && form.get('username')?.invalid">
+                    <small *ngIf="form.get('username')?.errors?.['required']"> Nome é obrigatório </small>
+                    <small *ngIf="form.get('username')?.errors?.['minlength']"> Mínimo 3 caracteres </small>
                 </div>
             </div>
 
@@ -29,4 +30,5 @@
             </div>
         </form>
     </div>
+    <span *ngIf="loading" class="loader"></span>
 </div>

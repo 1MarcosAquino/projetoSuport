@@ -9,39 +9,26 @@ POST {{URL_BASE}}/user/sing-in
 Accept: application/json
 Content-Type: application/json
 
-{
-  "username": "1cliente",
-  "password": "123456"
-}
+{ "username": "marcos", "password": "123456" }
 
 ###
-
 
 POST {{URL_BASE}}/user/sing-up
 Accept: application/json
 Content-Type: application/json
 
-{
-  "name": "4cliente",
-  "email": "9cliente@mail.com",
-  "password": "123456"
-}
+{ "username": "marcos21", "password": "123456", "confirmPassword": "123456" }
 
 ###
 
-POST {{URL_BASE}}/user/sing-in
-Accept: application/json
-Content-Type: application/json
-
-{
-    "email":"marcos@mail.com",
-    "password": "123456"
-}
-
-###
-
-GET {{URL_BASE}}/user
+GET {{URL_BASE}}/user/auth
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hcmNvc0BtYWlsLmNvbSIsImlhdCI6MTc3NDY1MTQ1OCwiZXhwIjoxNzc0NjUxNDc3LCJzdWIiOiIxIn0.gZadggUMf2ZqubuVIgcF2vvxrgiH3eFs3nCz5PbOO00
+
+###
+
+GET {{URL_BASE}}/user/auth
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFyY29zMjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJFbXBsb3llZSIsImV4cCI6MTc3NjIzNjAyMCwiaXNzIjoiYXBpIiwiYXVkIjoiYXBpIn0.11bYT-qCG2vPZLwfaqJOGR9G_ho6yyN9JQqcWgOrlEU
 
 ###

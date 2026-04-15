@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using MinhaApi.Domain.Entities;
 using MinhaApi.Application.Interfaces;
 using MinhaApi.Application.DTOs.User;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+// using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace MinhaApi.Api.Controllers
 {
@@ -21,7 +24,12 @@ namespace MinhaApi.Api.Controllers
         [HttpPost("sing-up")]
         public async Task<ActionResult<User>> Create(SignUpDTO dto)
         {
-            var user = _service.SignUp(dto);
+            var user = await _service.SignUp(dto);
+
+            if (user != null)
+            {
+                return Unauthorized(new { message = "Usuário indisponível" });
+            }
 
             return Ok(user);
         }
@@ -34,6 +42,17 @@ namespace MinhaApi.Api.Controllers
             if (token == null) return Unauthorized();
 
             return Ok(new { token });
+        }
+
+        [Authorize]
+        [HttpGet("auth")]
+        public IActionResult GetUserInfo()
+        {
+            var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+            var email = User.FindFirstValue(JwtRegisteredClaimNames.Email);
+            var role = User.FindFirstValue(ClaimTypes.Role);
+
+            return Ok(new { userId, email, role });
         }
 
         [Authorize(Roles = "Admin")]

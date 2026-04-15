@@ -6,7 +6,7 @@ namespace MinhaApi.Application.Interfaces
 {
     public interface IUserService
     {
-        Task<User> SignUp(SignUpDTO dto);
+        Task<User?> SignUp(SignUpDTO dto);
 
         Task<string?> SignIn(string username, string password);
 

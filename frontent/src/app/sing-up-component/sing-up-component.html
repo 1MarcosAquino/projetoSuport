@@ -1,8 +1,9 @@
 <div class="page-form">
+    <span *ngIf="loading" class="loader"></span>
     <div class="form-card">
         <h2 class="title">{{ title() }}</h2>
 
-        <form [formGroup]="form" (ngSubmit)="register()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <!-- USERNAME -->
             <div class="input-group">
                 <label for="username">Nome</label>
@@ -11,17 +12,6 @@
                 <div class="error" *ngIf="form.get('username')?.touched && form.get('username')?.invalid">
                     <small *ngIf="form.get('username')?.errors?.['required']"> Nome é obrigatório </small>
                     <small *ngIf="form.get('username')?.errors?.['minlength']"> Mínimo 3 caracteres </small>
-                </div>
-            </div>
-
-            <!-- EMAIL -->
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input formControlName="email" id="email" type="email" placeholder="Digite seu email" />
-
-                <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
-                    <small *ngIf="form.get('email')?.errors?.['required']"> Email é obrigatório </small>
-                    <small *ngIf="form.get('email')?.errors?.['email']"> Email inválido </small>
                 </div>
             </div>
 

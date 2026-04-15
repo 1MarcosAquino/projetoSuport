@@ -2,9 +2,9 @@ using System.Text;
 using MinhaApi.Application.Interfaces;
 using System.Security.Claims;
 using MinhaApi.Domain.Entities;
-
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+
 
 namespace MinhaApi.Infrastructure.Auth
 {
@@ -19,10 +19,10 @@ namespace MinhaApi.Infrastructure.Auth
 
             var claims = new[]
             {
-            new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Role, user.Level.ToString())
-        };
+                new Claim(JwtRegisteredClaimNames.Email, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(ClaimTypes.Role, user.Level.ToString())
+            };
 
             var token = new JwtSecurityToken(
                 issuer: "api",

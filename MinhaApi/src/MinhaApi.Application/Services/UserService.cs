@@ -18,10 +18,16 @@ namespace MinhaApi.Application.Services
             _tokenService = tokenService;
         }
 
-        public async Task<User> SignUp(SignUpDTO dto)
+        public async Task<User?> SignUp(SignUpDTO dto)
         {
+            var UserNameExists = await _userRepository.GetByUserNameAsync(dto.UserName);
+
+            if (UserNameExists != null) return null;
+
             var user = new User(dto.UserName, _passwordHasher.Hash(dto.Password), dto.Role);
+
             await _userRepository.AddAsync(user);
+
             return user;
         }
 

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
@@ -10,21 +11,39 @@ import { Router, RouterLink } from '@angular/router';
 export class DashboardComponent {
     protected readonly title = signal('Dashboard');
 
-    constructor(private router: Router) {
+    constructor(
+        private http: HttpClient,
+        private router: Router
+    ) {
         this.onOnload();
     }
 
     onOnload() {
-        const tokenIsvalid = this.validToken();
+        const token = this.getToken();
 
-        if (!tokenIsvalid) {
-            this.router.navigate(['']);
-        }
+        this.http
+            .get('http://localhost:5053/api/user/auth', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .subscribe({
+                next: response => {
+                    console.log(response);
+                },
+                error: err => {
+                    console.error('Erro ao enviar:', err);
+                    this.redirect();
+                },
+            });
     }
 
-    validToken() {
-        const token = localStorage.getItem('token') || '';
+    getToken() {
+        return localStorage.getItem('app_support') || '';
+    }
 
-        return !token.trim() || token.trim() !== '1234';
+    redirect() {
+        this.router.navigate(['']);
     }
 }
